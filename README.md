@@ -13,7 +13,7 @@ Rank de vitorias e partidas
     }
 
 
-- POST /login -> verifica as credenciais do usuário e retorna o token no Header
+- POST /login -> verifica as credenciais do usuário e retorna o token
   ```javascript
     body: {
       username: 'maria',
