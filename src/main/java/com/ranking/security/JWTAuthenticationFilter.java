@@ -20,13 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ranking.model.AccessToken;
+
 import com.ranking.model.UserApplication;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.ranking.security.SecurityConstants.EXPIRATION_TIME;
-import static com.ranking.security.SecurityConstants.HEADER_STRING;
 import static com.ranking.security.SecurityConstants.SECRET;
-import static com.ranking.security.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;
@@ -54,13 +53,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		ObjectMapper objectMapper = new ObjectMapper();
+
 		String token = JWT.create()
 				.withSubject(((User) authResult.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
+		
 		AccessToken accessToken = new AccessToken(token);
 		String tokenJson = objectMapper.writeValueAsString(accessToken);
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().write(tokenJson);
+
 	}
 }
