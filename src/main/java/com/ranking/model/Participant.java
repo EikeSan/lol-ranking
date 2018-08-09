@@ -1,5 +1,6 @@
 package com.ranking.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,10 @@ public class Participant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	
+	@Column(unique=true, nullable=false)
+	private String name; //unique player nickname or team name
+	
 	private Integer win;
 	private Integer match;
 
