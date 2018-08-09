@@ -45,7 +45,7 @@ Rank de vitorias e partidas
       match: 10, *
       win: 4
     }
-- PUT /participant/updateWins/{id}-> Incrementar número de vitórias do player/time
+- PUT /participant/updateWins/{id} -> Incrementar número de vitórias do player/time
 
   ```javascript
     body: { 
@@ -54,9 +54,9 @@ Rank de vitorias e partidas
 
 - DELETE /participant/delete/{id} -> Excluir player/time
 
-- GET /participant/ranking -> Listar players/times pelo número de viórias, menor número de partidas utilizado com desempate
+- GET /participant/ranking -> Listar players/times pelo número de vitórias, menor número de partidas utilizado com desempate
 
-- GET /participant/{id}-> Buscar player/time
+- GET /participant/{id} -> Buscar player/time
 
 
 
