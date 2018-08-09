@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -141,6 +143,43 @@ public class ParticipantController {
 			
 			participant.setWin(win);
 			return new ResponseEntity<Participant>(participantRepository.save(participant), HttpStatus.OK);
+		} catch (Exception e) {
+			CustomError customError = new CustomError("Bad Request", e.getMessage());
+			return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<?> delete(@PathVariable(value = "id") Long participantId){
+		Participant participant; 
+		try {
+			participant = participantRepository.findById(participantId).get();
+				
+		} catch (Exception e) {
+			CustomError customError = new CustomError("Bad Request", e.getMessage());
+			return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
+		}
+		
+		try {
+			participantRepository.delete(participant);
+			return new ResponseEntity<Participant>(HttpStatus.OK);
+		} catch (Exception e) {
+			CustomError customError = new CustomError("Bad Request", e.getMessage());
+			return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/ranking")
+	public ResponseEntity<?> ranking(){
+		return new ResponseEntity<>(participantRepository.findAllByWinNotNullOrderByWinDescMatchAsc(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> findParticipantById(@PathVariable(value = "id") Long participantId){
+		Participant participant; 
+		try {
+			participant = participantRepository.findById(participantId).get();
+			return new ResponseEntity<Participant>(participant,HttpStatus.OK);
 		} catch (Exception e) {
 			CustomError customError = new CustomError("Bad Request", e.getMessage());
 			return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);

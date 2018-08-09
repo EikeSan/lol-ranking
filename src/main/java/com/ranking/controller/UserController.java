@@ -1,7 +1,9 @@
 package com.ranking.controller;
 
 import java.util.List;
- 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +29,9 @@ public class UserController {
 	
 	@PostMapping("/signUp")
 	
-	public void signUp(@RequestBody UserApplication user){
+	public ResponseEntity<?> signUp(@RequestBody UserApplication user){
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		userRepository.save(user);
+		return new ResponseEntity<>(userRepository.save(user),HttpStatus.OK) ;
 	}
 
 	@GetMapping("/list")
