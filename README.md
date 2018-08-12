@@ -2,7 +2,7 @@
 Rank de vitorias e partidas
 
 
-- GET /users s-> lista todos os usuários
+- GET /users-> lista todos os usuários
 
 - POST /users/signUp -> cadastrar novo usuário
 
@@ -54,7 +54,7 @@ Rank de vitorias e partidas
 
 - DELETE /participants/{id} -> Excluir player/time
 
-- GET /ranking -> Listar players/times pelo número de vitórias, menor número de partidas utilizado com desempate
+- GET /participants/ranking -> Listar players/times pelo número de vitórias, menor número de partidas utilizado com desempate
 
 - GET /participant/{id} -> Buscar player/time
 
