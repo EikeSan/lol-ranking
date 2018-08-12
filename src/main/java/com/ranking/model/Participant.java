@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Participant {
@@ -14,9 +17,14 @@ public class Participant {
 	private Long id;
 	
 	@Column(unique=true, nullable=false)
+	@NotNull
+	@Size(min = 2, max = 20)
 	private String name; //unique player nickname or team name
 	
+	@PositiveOrZero
 	private Integer winCount;
+	
+	@PositiveOrZero
 	private Integer matchCount;
 
 	public Long getId() {
