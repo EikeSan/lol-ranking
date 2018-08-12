@@ -2,7 +2,7 @@
 Rank de vitorias e partidas
 
 
-- GET /users/list -> lista todos os usuários
+- GET /users s-> lista todos os usuários
 
 - POST /users/signUp -> cadastrar novo usuário
 
@@ -20,7 +20,7 @@ Rank de vitorias e partidas
       password: '123456'
     }
     
-- POST /participant/create -> cadastrar novo player/time
+- POST /participants -> cadastrar novo player/time
 
   ```javascript
     body: {
@@ -29,7 +29,7 @@ Rank de vitorias e partidas
       win: 4
     }
 
-- PUT /participant/update/{id} -> Atualizar dados do player/time
+- PUT /participants/{id} -> Atualizar dados do player/time
 
   ```javascript
     body: {
@@ -38,23 +38,23 @@ Rank de vitorias e partidas
       win: 4
     }
     
-- PUT /participant/updateStatus/{id} -> Incrementar número de partidas e vitórias do player/time
+- PUT /participants/updateStatus/{id} -> Incrementar número de partidas e vitórias do player/time
 
   ```javascript
     body: { 
       match: 10, *
       win: 4
     }
-- PUT /participant/updateWins/{id} -> Incrementar número de vitórias do player/time
+- PUT /participants/updateWins/{id} -> Incrementar número de vitórias do player/time
 
   ```javascript
     body: { 
       win: 4 *
     }
 
-- DELETE /participant/delete/{id} -> Excluir player/time
+- DELETE /participants/{id} -> Excluir player/time
 
-- GET /participant/ranking -> Listar players/times pelo número de vitórias, menor número de partidas utilizado com desempate
+- GET /ranking -> Listar players/times pelo número de vitórias, menor número de partidas utilizado com desempate
 
 - GET /participant/{id} -> Buscar player/time
 

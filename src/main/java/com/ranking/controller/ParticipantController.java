@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ranking.interfaces.ParticipantRepository;
@@ -18,7 +19,7 @@ import com.ranking.model.CustomError;
 import com.ranking.model.Participant;
 
 @RestController
-@RequestMapping("participant")
+@RequestMapping("participants")
 public class ParticipantController {
 	private ParticipantRepository participantRepository;
 	
@@ -26,19 +27,19 @@ public class ParticipantController {
 		this.participantRepository = participantRepository;
 	}
 	
-	@PostMapping("create")
+	@PostMapping("/")
 	public ResponseEntity<?> createParticipant(@Valid @RequestBody Participant participant) {
 		try {
-			if (participant.getWin() != null &&  participant.getMatch() == null) {
+			if (participant.getWinCount() != null &&  participant.getMatchCount() == null) {
 				CustomError customError = new CustomError("Bad Request", "You Must Specify Number of Matches Greater or Equal than Wins");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
 			
-			if (participant.getWin() != null && participant.getWin() > participant.getMatch()) {
+			if (participant.getWinCount() != null && participant.getWinCount() > participant.getMatchCount()) {
 				CustomError customError = new CustomError("Bad Request", "Wins Can't be Greater than Matches");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
-			return new ResponseEntity<Participant>(participantRepository.save(participant), HttpStatus.OK);
+			return new ResponseEntity<Participant>(participantRepository.save(participant), HttpStatus.CREATED);
 
 		} catch (Exception e) {
 			CustomError customError = new CustomError("Bad Request", e.getMessage());
@@ -46,7 +47,7 @@ public class ParticipantController {
 		}
 	}
 	
-	@PutMapping("/update/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable(value = "id") Long participantId, @RequestBody Participant updateParticipant){
 		Participant participant; 
 		try {
@@ -59,19 +60,19 @@ public class ParticipantController {
 		
 		try {
 			
-			if (updateParticipant.getWin() != null &&  updateParticipant.getMatch() == null) {
+			if (updateParticipant.getWinCount() != null &&  updateParticipant.getMatchCount() == null) {
 				CustomError customError = new CustomError("Bad Request", "You Must Specify Number of Matches Greater or Equal than Wins");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
 			
-			if (updateParticipant.getWin() != null && updateParticipant.getWin() > updateParticipant.getMatch()) {
+			if (updateParticipant.getWinCount() != null && updateParticipant.getWinCount() > updateParticipant.getMatchCount()) {
 				CustomError customError = new CustomError("Bad Request", "Wins Can't be Greater than Matches");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
 			
 			participant.setName(updateParticipant.getName());
-			participant.setWin(updateParticipant.getWin());
-			participant.setMatch(updateParticipant.getMatch());
+			participant.setWinCount(updateParticipant.getWinCount());
+			participant.setMatchCount(updateParticipant.getMatchCount());
 			return new ResponseEntity<Participant>(participantRepository.save(participant), HttpStatus.OK);
 		} catch (Exception e) {
 			CustomError customError = new CustomError("Bad Request", e.getMessage());
@@ -91,24 +92,24 @@ public class ParticipantController {
 		}
 		
 		try {
-			int win = ((participant.getWin() != null) ? participant.getWin() : 0) 
-					+ ((updateParticipant.getWin() != null) ? updateParticipant.getWin() : 0);
+			int win = ((participant.getWinCount() != null) ? participant.getWinCount() : 0) 
+					+ ((updateParticipant.getWinCount() != null) ? updateParticipant.getWinCount() : 0);
 			
-			int match = ((participant.getMatch()!= null) ? participant.getMatch() : 0) 
-					+ ((updateParticipant.getMatch()!= null) ? updateParticipant.getMatch() : 0);
+			int match = ((participant.getMatchCount()!= null) ? participant.getMatchCount() : 0) 
+					+ ((updateParticipant.getMatchCount()!= null) ? updateParticipant.getMatchCount() : 0);
 			
-			if(updateParticipant.getMatch() == null) {
+			if(updateParticipant.getMatchCount() == null) {
 				CustomError customError = new CustomError("Bad Request", "Matches can't be null");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
 			
-			if (updateParticipant.getWin() != null && updateParticipant.getWin() > updateParticipant.getMatch()) {
+			if (updateParticipant.getWinCount() != null && updateParticipant.getWinCount() > updateParticipant.getMatchCount()) {
 				CustomError customError = new CustomError("Bad Request", "Wins Can't be Greater than Matches");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
 			
-			participant.setWin(win);
-			participant.setMatch(match);
+			participant.setWinCount(win);
+			participant.setMatchCount(match);
 			return new ResponseEntity<Participant>(participantRepository.save(participant), HttpStatus.OK);
 		} catch (Exception e) {
 			CustomError customError = new CustomError("Bad Request", e.getMessage());
@@ -128,20 +129,20 @@ public class ParticipantController {
 		}
 		
 		try {
-			int win = ((participant.getWin() != null) ? participant.getWin() : 0) 
-					+ ((updateParticipant.getWin() != null) ? updateParticipant.getWin() : 0);
+			int win = ((participant.getWinCount() != null) ? participant.getWinCount() : 0) 
+					+ ((updateParticipant.getWinCount() != null) ? updateParticipant.getWinCount() : 0);
 			
-			if(updateParticipant.getWin() == null) {
+			if(updateParticipant.getWinCount() == null) {
 				CustomError customError = new CustomError("Bad Request", "Wins can't be null");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
 			
-			if (win > updateParticipant.getMatch()) {
+			if (win > updateParticipant.getMatchCount()) {
 				CustomError customError = new CustomError("Bad Request", "Wins Can't be Greater than Matches");
 				return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
 			}
 			
-			participant.setWin(win);
+			participant.setWinCount(win);
 			return new ResponseEntity<Participant>(participantRepository.save(participant), HttpStatus.OK);
 		} catch (Exception e) {
 			CustomError customError = new CustomError("Bad Request", e.getMessage());
@@ -149,7 +150,7 @@ public class ParticipantController {
 		}
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long participantId){
 		Participant participant; 
 		try {

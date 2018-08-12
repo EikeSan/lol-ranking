@@ -2,17 +2,17 @@ package com.ranking.model;
 
 public class AccessToken {
 
-	private String access_token;
+	private String accessToken;
 
-	public AccessToken(String access_token) {
-		this.access_token = access_token;
+	public AccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 	
 	public String getAccess_token() {
-		return access_token;
+		return accessToken;
 	}
 
-	public void setAccess_token(String access_token) {
-		this.access_token = access_token;
+	public void setAccess_token(String accessToken) {
+		this.accessToken = accessToken;
 	}
 }

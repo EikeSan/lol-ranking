@@ -16,8 +16,8 @@ public class Participant {
 	@Column(unique=true, nullable=false)
 	private String name; //unique player nickname or team name
 	
-	private Integer win;
-	private Integer match;
+	private Integer winCount;
+	private Integer matchCount;
 
 	public Long getId() {
 		return id;
@@ -35,20 +35,20 @@ public class Participant {
 		this.name = name;
 	}
 
-	public Integer getWin() {
-		return win;
+	public Integer getWinCount() {
+		return winCount;
 	}
 
-	public void setWin(Integer win) {
-		this.win = win;
+	public void setWinCount(Integer winCount) {
+		this.winCount = winCount;
 	}
 
-	public Integer getMatch() {
-		return match;
+	public Integer getMatchCount() {
+		return matchCount;
 	}
 
-	public void setMatch(Integer match) {
-		this.match = match;
+	public void setMatchCount(Integer matchCount) {
+		this.matchCount = matchCount;
 	}
 
 }

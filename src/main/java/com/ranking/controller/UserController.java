@@ -31,10 +31,10 @@ public class UserController {
 	
 	public ResponseEntity<?> signUp(@RequestBody UserApplication user){
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		return new ResponseEntity<>(userRepository.save(user),HttpStatus.OK) ;
+		return new ResponseEntity<>(userRepository.save(user),HttpStatus.CREATED) ;
 	}
 
-	@GetMapping("/list")
+	@GetMapping("/")
     public List<UserApplication> getTasks() {
         return userRepository.findAll();
     }
