@@ -34,7 +34,7 @@ public class UserController {
 		return new ResponseEntity<>(userRepository.save(user),HttpStatus.CREATED) ;
 	}
 
-	@GetMapping("/")
+	@GetMapping("")
     public List<UserApplication> getTasks() {
         return userRepository.findAll();
     }

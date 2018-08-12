@@ -26,7 +26,7 @@ public class ParticipantController {
 		this.participantRepository = participantRepository;
 	}
 	
-	@PostMapping("/")
+	@PostMapping("")
 	public ResponseEntity<?> createParticipant(@Valid @RequestBody Participant participant) {
 		try {
 			if (participant.getWinCount() != null &&  participant.getMatchCount() == null) {
@@ -171,7 +171,7 @@ public class ParticipantController {
 	
 	@GetMapping("/ranking")
 	public ResponseEntity<?> ranking(){
-		return new ResponseEntity<>(participantRepository.findAllByWinCountNotNullOrderByWinCountDescMatchCountAsc(), HttpStatus.OK);
+		return new ResponseEntity<>(participantRepository.findAllByWinCountNotNullAndMatchCountNotNullOrderByWinCountDescMatchCountAsc(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
