@@ -18,9 +18,9 @@ Rank de vitorias e partidas
 ## Api Routes ##
 
 
-- GET /users-> lista todos os usuários
+- GET /users-> list all users
 
-- POST /users/signUp -> cadastrar novo usuário
+- POST /users/signUp -> create new user
 
   ```javascript
     body: {
@@ -29,50 +29,50 @@ Rank de vitorias e partidas
     }
 
 
-- POST /login -> verifica as credenciais do usuário e retorna o token
+- POST /login -> verify the user's credential and if success return the access token
   ```javascript
     body: {
       username: 'maria',
       password: '123456'
     }
     
-- POST /participants -> cadastrar novo player/time
+- POST /participants -> create new player/team
 
   ```javascript
     body: {
-      name: 'NTC', *//Unique Player Nickname ou Nome do Time 
+      name: 'NTC', *//Unique Player Nickname or Team name 
       match: 10,
       win: 4
     }
 
-- PUT /participants/{id} -> Atualizar dados do player/time
+- PUT /participants/{id} -> Update player/team's information 
 
   ```javascript
     body: {
-      name: 'NTC', //Unique Player Nickname ou Nome do Time 
+      name: 'NTC', //Unique Player Nickname or Team name 
       match: 10,
       win: 4
     }
     
-- PUT /participants/updateStatus/{id} -> Incrementar número de partidas e vitórias do player/time
+- PUT /participants/updateStatus/{id} -> Increase player/team's number of matches and wins  
 
   ```javascript
     body: { 
       match: 10, *
       win: 4
     }
-- PUT /participants/updateWins/{id} -> Incrementar número de vitórias do player/time
+- PUT /participants/updateWins/{id} -> Increase player/team's number of wins 
 
   ```javascript
     body: { 
       win: 4 *
     }
 
-- DELETE /participants/{id} -> Excluir player/time
+- DELETE /participants/{id} -> Delete player/team
 
-- GET /participants/ranking -> Listar players/times pelo número de vitórias, menor número de partidas utilizado com desempate
+- GET /participants/ranking -> List players/team's by number of win and lower number of matches in case of draw
 
-- GET /participant/{id} -> Buscar player/time
+- GET /participant/{id} -> Find player/team
 
 
 
