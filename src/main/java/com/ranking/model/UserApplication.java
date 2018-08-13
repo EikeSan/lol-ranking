@@ -1,5 +1,6 @@
 package com.ranking.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class UserApplication {
 	
 	@NotNull
 	@Size(min = 3, max = 20)
+	@Column(unique = true, nullable = false)
 	private String username;
 	
 	@NotNull

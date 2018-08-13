@@ -8,11 +8,11 @@ public class AccessToken {
 		this.accessToken = accessToken;
 	}
 	
-	public String getAccess_token() {
+	public String getAccessToken() {
 		return accessToken;
 	}
 
-	public void setAccess_token(String accessToken) {
+	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
 }
