@@ -1,5 +1,21 @@
 # lol-ranking
-Rank de vitorias e partidas
+
+Rank de vitorias e partidas 
+
+## How Install to local server ##
+
+* `git clone https://github.com/EikeSan/lol-ranking`
+* `mvn clean package`
+* `Create a database and specifies into application.properties`
+* `mvn spring-boot:run -DskipTests -Dserver.port=8080`
+* `The command above start a local server in: http://localhost:8080/`
+* `First run the signUp route to create a user them the login route to retrive your token`
+* `You can access http://localhost:8080/swagger-ui.html to test some routes`
+* `Routes also are described below`
+
+
+
+## Api Routes ##
 
 
 - GET /users-> lista todos os usuários
