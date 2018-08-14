@@ -72,7 +72,7 @@ Rank de vitorias e partidas
 
 - GET /participants/ranking -> List players/team's by number of win and lower number of matches in case of draw
 
-- GET /participant/{id} -> Find player/team
+- GET /participants/{id} -> Find player/team
 
 
 
