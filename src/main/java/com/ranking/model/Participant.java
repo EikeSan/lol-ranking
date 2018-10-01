@@ -27,6 +27,14 @@ public class Participant {
 	@PositiveOrZero
 	private Integer matchCount;
 
+	public Participant(@NotNull @Size(min = 2, max = 20) String name) {
+		this.name = name;
+	}
+
+	public  Participant(){
+
+	}
+
 	public Long getId() {
 		return id;
 	}
