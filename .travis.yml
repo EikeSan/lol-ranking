@@ -14,7 +14,7 @@ before_script:
 - psql -c "CREATE USER myuser WITH PASSWORD 'postgres';" -U postgres
 - export DATABSE_URL="jdbc:postgresql://localhost/ranking?user=myuser&password=postgres&ssl=false"
 - export TEST_DATABSE_URL="jdbc:postgresql://localhost/test_ranking?user=myuser&password=postgres&ssl=false"
-
+- mvn clean install  -DSkiptests
 deploy:
   provider: heroku
   api-key:
